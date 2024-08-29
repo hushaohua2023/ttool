@@ -1,19 +1,3 @@
-https://convertico.com/
-
-
-set ELECTRON_MIRROR=https://npmmirror.com/mirrors/electron/
-.npmrc 文件添加内容
-electron_mirror=https://npmmirror.com/mirrors/electron/
-
-生成运行壳
-npm install --save-dev electron
-
-打包
-npm install --save-dev electron-builder
-
-更新
-npm install electron-updater --save
-
-
-生成exe文件
-npm run dist  
+version https://git-lfs.github.com/spec/v1
+oid sha256:831cf25034846e90b93034b5a97fa93b531c7a3dd0b04ef5b99202b4098ddc1f
+size 916
