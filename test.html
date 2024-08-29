@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* 禁止水平滚动 */
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 设置背景图片 */
+        body {
+            background-image: url('https://www.datocan.com/background-tt.png'); /* 替换为你的背景图片路径 */
+            background-size: cover; /* 背景图片覆盖整个页面 */
+            background-position: center; /* 背景图片居中 */
+            background-repeat: no-repeat; /* 不重复背景图片 */
+            background-attachment: fixed; /* 背景图片固定，不随页面滚动 */
+            font-family: Arial, sans-serif;
+        }
+
+        /* 自定义标题栏样式 */
+        #title-bar {
+            width: 100%;
+            height: 30px;
+            background-color: rgba(51, 51, 51, 0.8); /* 半透明背景 */
+            color: white;
+            -webkit-app-region: drag; /* 允许拖动 */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-sizing: border-box; /* 确保 padding 不会导致元素溢出 */
+        }
+
+        /* 按钮通用样式 */
+        .title-bar-btn {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            -webkit-app-region: no-drag; /* 禁止拖动 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 关闭按钮样式 */
+        #close-btn {
+            background-color: #444;
+        }
+
+        #close-btn:hover {
+            background-color: red;
+        }
+
+        /* 下载按钮样式 */
+        #download-btn {
+            background-color: #444;
+            margin-right: 10px;
+        }
+
+        #download-btn:hover {
+            background-color: green;
+        }
+
+        /* 内容区域样式 */
+        #content {
+            padding: 50px;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="title-bar">
+        <span>My Application</span>
+        <div style="display: flex;">
+            <div id="download-btn" class="title-bar-btn" onclick="window.downloadFile()">↓</div>
+            <div id="close-btn" class="title-bar-btn" onclick="window.closeApp()">X</div>
+        </div>
+    </div>
+
+    <div id="content">
+        <!-- 这里是应用的主要内容 -->
+        <h1>最好用的实时变声器</h1>
+        <p>更好听的声音，成就更好的你，改变从这里开始...</p>
+    </div>
+
+    <script>
+        const { ipcRenderer } = require('electron');
+
+        // 关闭应用的功能
+        window.closeApp = function() {
+            ipcRenderer.send('app-close'); // 发送关闭事件
+        };
+
+        // 下载文件的功能
+        window.downloadFile = function() {
+            const downloadUrl = 'https://www.datocan.com/ttool1.0.3.exe'; // 替换为实际的下载 URL
+            console.log('Sending download-file event for URL:', downloadUrl);
+            ipcRenderer.send('download-file', downloadUrl); // 发送下载事件和URL
+        };
+    </script>
+</body>
+</html>
+
+
